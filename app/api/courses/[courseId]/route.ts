@@ -64,11 +64,14 @@ export async function PATCH(
 ) {
   try {
     const { userId } = auth();
+    console.log('userId:', userId)
     const { courseId } = params;
+    console.log('courseId:', courseId)
     const values = await req.json();
+    console.log('values:', values)
 
-    if (!userId || isTeacher(userId)) {
-      return new NextResponse("Unauthorized", { status: 401 });
+    if (!userId || !isTeacher(userId)) {
+      return new NextResponse("Unauthorized_deb", { status: 401 });
     }
 
     const course = await db.course.update({
