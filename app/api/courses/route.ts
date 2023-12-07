@@ -7,12 +7,11 @@ import { isTeacher } from "@/lib/teacher";
 export async function POST(req: Request) {
   try {
     const { userId } = auth();
-    // console.log(userId);
+    console.log('UserID', userId);
     const { title } = await req.json();
 
     if (!userId || !isTeacher(userId)) {
       return new NextResponse("Unauthorized", { status: 401 });
-      console.log(NextResponse)
     }
 
     const course = await db.course.create({
